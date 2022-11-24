@@ -1,11 +1,11 @@
 package vo;
 public class User {
 
-    private String name;
-    private int stock;
-    private String accountNum;
-    private String bankName;
-    private String pwd;
+    private String name; //유저 이름
+    private int stock;   //
+    private String accountNum;  //계좌번호
+    private String bankName;   //은행명
+    private String pwd;       //비밀번호
 
     public User(String name,int stock ,String accountNum, String bankName, String pwd) {
         this.name = name;
