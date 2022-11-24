@@ -1,2 +1,4 @@
-package service;public class Bank {
+package service;
+
+public class Bank {
 }

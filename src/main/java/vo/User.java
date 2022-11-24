@@ -1,2 +1,4 @@
-package vo;public class User {
+package vo;
+
+public class User {
 }

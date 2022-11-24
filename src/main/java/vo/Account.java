@@ -1,2 +1,4 @@
-package vo;public class Account {
+package vo;
+
+public class Account {
 }
