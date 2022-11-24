@@ -25,10 +25,10 @@ public class App {
                     bankManager();
                     break;
 
-//                case 2:
-//                    moneyList();
-//                    break;
-//
+                case 2:
+                   moneyList();
+                 break;
+
 //                case 3:
 //                    userInfo();
 //                    break;
@@ -114,7 +114,7 @@ public class App {
             }
         }
     }
-//    public static void moneyList () {
+    public static void moneyList () {
 //        Scanner sc = new Scanner(System.in);
 //        while (true) {
 //            // 입출금내역 관련 화면
@@ -146,7 +146,7 @@ public class App {
 //
 //            }
 //        }
-//    }
+    }
 //
 //    public static void userInfo () {
 //        Scanner sc = new Scanner(System.in);
