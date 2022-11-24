@@ -67,6 +67,46 @@ public class App {
                     System.out.println("등록이 완료되었습니다");
                     break;
 
+                case 2:
+                    System.out.println("=== 입출금 ===");
+                    System.out.println("1. 입금 2. 출금");
+                    int num = sc.nextInt();
+
+                    if (num == 1) {
+                        // 입금 메서드 호출
+                    } else {
+                        // 출금 메서드 호출
+                    }
+
+                    break;
+
+                case 3:
+                    System.out.println("=== 등록계좌 수정 및 삭제 ===");
+                    System.out.println("1. 수정 2. 삭제");
+                    int num2 = sc.nextInt();
+
+                    if (num2 == 1) {
+                        // 수정 메서드 호출
+                    } else {
+                        // 삭제 메서드 호출
+                    }
+                    break;
+
+                case 4:
+                    System.out.println("=== 등록계좌 조회 ===");
+                    System.out.println("1. 이름으로 조회 2. 계좌번호로 조회 3. 전체 조회");
+                    int num3 = sc.nextInt();
+
+                    if (num3 == 1) {
+                        // 이름 조회 메서드 호출
+                    } else if (num3 == 2) {
+                        // 계좌번호 조희 메서드 호출
+                    } else {
+                        // 전체 조회 메서드 호출
+                    }
+                    break;
+
+
                 default:
                     System.out.println("다시 입력해 주세요.");
                     break;
