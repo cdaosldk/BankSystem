@@ -1,11 +1,7 @@
 import service.Bank;
 import vo.User;
-
-import java.text.DecimalFormat;
 import java.util.Scanner;
 import java.util.regex.Pattern;
-
-import static java.text.NumberFormat.Field.PREFIX;
 
 public class App {
 //    private static final scan = new Scanner();
@@ -16,10 +12,10 @@ public class App {
             // main 화면, 각 클래스와 관련된 내용으로 연결되고 이후 접속 시 관련 메뉴를 한 번 더 볼 수 있도록 설정
             System.out.println("=== BankSystem에 오신 것을 환영합니다 ===");
             System.out.println("원하시는 메뉴에 해당하는 번호를 입력하세요.");
-            System.out.println("1. 은행 관리 2. 거래내역 관리 3. USER 정보 4. 종료");
+            System.out.println("1. 은행 관리 2. 거래내역 관리 3. 종료");
             int select = sc.nextInt();
 
-            if (select == 4) {
+            if (select == 3) {
                 System.out.println("안녕히 가십시오");
                 break;
             }
@@ -32,10 +28,6 @@ public class App {
                 case 2:
                    moneyList();
                  break;
-
-//                case 3:
-//                    userInfo();
-//                    break;
 
                 default:
                     System.out.println("다시 입력해 주세요.");
@@ -165,7 +157,6 @@ public class App {
                         // 이름 조회 메서드 호출
                         System.out.print("조회하실 성함을 입력하세요 :");
                         String searchName = sc.next();
-                        // 이름 조회 함수 호출
 
                         if(!bank.searchByUserName(searchName)){
                             return;
@@ -173,9 +164,19 @@ public class App {
 
                     } else if (num3 == 2) {
                         // 계좌번호 조희 메서드 호출
-                    } else {
+                        System.out.print("조회하실 계좌번호를 입력하세요 :");
+                        String serchAccountNum = sc.next();
+                        if(!bank.confrimAccountNum(serchAccountNum)){
+                            return;
+                        }
+                        if(!bank.searchByAccountNum(serchAccountNum)){
+                            return;
+                        }
+                    } else if(num3 == 3) {
                         // 전체 조회 메서드 호출
                         bank.showAll();
+                    }else{
+                        System.out.println("잘못된 번호입니다!");
                     }
                     break;
 

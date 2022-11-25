@@ -38,7 +38,7 @@ public class Bank {
         }
     }
 
-    public Boolean checkToUsableBankNum(String bankNum){
+    public boolean checkToUsableBankNum(String bankNum){
 
         if(userList.stream().anyMatch(s->s.getAccountNum().equals(bankNum))){
             System.out.println("이미 등록된 계좌번호입니다!");
@@ -47,7 +47,7 @@ public class Bank {
         return true;
     }
 
-    public Boolean confrimAccountNum(String inputAccountNum){
+    public boolean confrimAccountNum(String inputAccountNum){
 
         if(userList.stream().anyMatch(s -> s.getAccountNum().equals(inputAccountNum))){
             return true;
@@ -56,7 +56,7 @@ public class Bank {
         return false;
     }
 
-    public Boolean confrimAccountPwd(String inputAccountNum, String pwd){
+    public boolean confrimAccountPwd(String inputAccountNum, String pwd){
 
         Stream<User> userInfo = userList.stream().filter(s -> s.getAccountNum().equals(inputAccountNum));
 
@@ -106,11 +106,22 @@ public class Bank {
         }
     }
 
-    public Boolean searchByUserName(String searchUserName){
+    public boolean searchByUserName(String searchUserName){
         Stream<User> searchUser = userList.stream().filter(s -> s.getName().equals(searchUserName));
         //위에 선언한 스트림으로 공백일 때 계좌 없다고 하고 싶은데 필터로 찾지 못해도 무슨 값이 담기는지 봐도 모르겠음..!!
         if(!userList.stream().anyMatch(s -> s.getName().equals(searchUserName))){
             System.out.println(searchUserName+"님으로 등록된 계좌가 없습니다!");
+            return false;
+        }
+        searchUser.forEach(u -> System.out.println("--------\n"+u.getName()+" "+u.getAccountNum()+ " \n"+u.getStock()+"원 \n"+u.getBankName()+" 은행"));
+        return true;
+    }
+
+    public boolean searchByAccountNum(String searchAccountNum){
+        Stream<User> searchUser = userList.stream().filter(s -> s.getAccountNum().equals(searchAccountNum));
+        //위에 선언한 스트림으로 공백일 때 계좌 없다고 하고 싶은데 필터로 찾지 못해도 무슨 값이 담기는지 봐도 모르겠음..!!
+        if(!userList.stream().anyMatch(s -> s.getAccountNum().equals(searchAccountNum))){
+            System.out.println(searchAccountNum+"번호로 등록된 계좌가 없습니다!");
             return false;
         }
         searchUser.forEach(u -> System.out.println("--------\n"+u.getName()+" "+u.getAccountNum()+ " \n"+u.getStock()+"원 \n"+u.getBankName()+" 은행"));
