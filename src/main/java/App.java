@@ -12,7 +12,7 @@ public class App {
             // main 화면, 각 클래스와 관련된 내용으로 연결되고 이후 접속 시 관련 메뉴를 한 번 더 볼 수 있도록 설정
             System.out.println("=== BankSystem에 오신 것을 환영합니다 ===");
             System.out.println("원하시는 메뉴에 해당하는 번호를 입력하세요.");
-            System.out.println("1. 은행 관리 2. 입출금 내역관리 3. USER 정보 4. 종료");
+            System.out.println("1. 은행 관리 2. 거래내역 관리 3. USER 정보 4. 종료");
             int select = sc.nextInt();
 
             if (select == 4) {
@@ -115,69 +115,56 @@ public class App {
         }
     }
     public static void moneyList () {
-//        Scanner sc = new Scanner(System.in);
-//        while (true) {
-//            // 입출금내역 관련 화면
-//            System.out.println("=== 입출금 내역 관리 ===");
-//            System.out.println("원하시는 메뉴에 해당하는 번호를 입력하세요.");
-//            System.out.println("1.  2. 입출금 내역관리 3.  4. 이전");
-//            int select = sc.nextInt();
-//
-//            if (select == 4) {
-//                break;
-//            }
-//
-//            switch (select) {
-//                case 1:
-//                    bankManager();
-//                    break;
-//
-//                case 2:
-//                    moneyList();
-//                    break;
-//
-//                case 3:
-//                    userInfo();
-//                    break;
-//
-//                default:
-//                    System.out.println("다시 입력해 주세요.");
-//                    break;
-//
-//            }
-//        }
+        Scanner sc = new Scanner(System.in);
+//        String accNum = 계좌번호 호출
+        while (true) {
+            // 입출금내역 관련 화면
+            System.out.println("=== 거래내역 관리 ===");
+            System.out.println("원하시는 메뉴에 해당하는 번호를 입력하세요.");
+            System.out.println("1. 잔고 확인 2. 거래 내역 조회 3. 이전");
+            int select = sc.nextInt();
+
+            if (select == 3) {
+                break;
+            }
+
+            switch (select) {
+                case 1:
+                    System.out.println("이름을 입력하세요");
+                    String name = sc.nextLine();
+//                    if ( name == 계좌 클래스의 이름) {
+//                          return 이름;
+//                          System.out.println(이름);
+//                          System.out.println("당신의 계좌번호는 : " + accNum);
+//                          break;
+//                    }
+                    System.out.println("비밀번호를 입력하세요.");
+//                    System.out.println("현재 잔액은 " + 잔액 + " 원 입니다.");
+//                    비밀번호를 틀릴 경우
+                    break;
+
+                case 2:
+                    System.out.println("이름을 입력하세요");
+                    String name2 = sc.nextLine();
+//                    if ( name2 == 계좌 클래스의 이름) { // 계좌번호를 키로 한 거래내역 클래스에 접근
+//                          return 이름;
+//                          System.out.println(이름);
+//                          System.out.println("당신의 계좌번호는 : " + accNum);
+//                          break;
+//                    }
+//                    거래내역 조회 메서드
+                    break;
+
+                default:
+                    System.out.println("다시 입력해 주세요.");
+                    break;
+
+            }
+        }
     }
-//
-//    public static void userInfo () {
-//        Scanner sc = new Scanner(System.in);
-//        while (true) {
-//            // 유저정보 관련화면
-//            System.out.println("=== BankSystem에 오신 것을 환영합니다 ===");
-//            System.out.println("원하시는 메뉴에 해당하는 번호를 입력하세요.");
-//            System.out.println("1. 은행 관리 2. 입출금 내역관리 3. USER 정보 4. 이전");
-//            int select = sc.nextInt();
-//
-//            if (select == 4) {
-//                break;
-//            }
-//            switch (select) {
-//                case 1:
-//                    bankManager();
-//                    break;
-//
-//                case 2:
-//                    moneyList();
-//                    break;
-//
-//                case 3:
-//                    userInfo();
-//                    break;
-//
-//                default:
-//                    System.out.println("다시 입력해 주세요.");
-//                    break;
-//
-//            }
-//        }
-//    }
+
+    public static void userInfo () {
+        // 유저정보 관련화면
+        System.out.println("=== USER 정보 ===");
+    }
 }
