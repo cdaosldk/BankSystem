@@ -2,7 +2,7 @@ package vo;
 public class User {
 
     private String name; //유저 이름
-    private int stock;   // 잔고
+    private int stock;   //잔고
     private String accountNum;  //계좌번호
     private String bankName;   //은행명
     private String pwd;       //비밀번호
@@ -17,6 +17,14 @@ public class User {
 
     public void setStock(int stock) {
         this.stock = stock;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setBankName(String bankName) {
+        this.bankName = bankName;
     }
 
     public String getName() {
