@@ -10,7 +10,6 @@ import java.util.stream.Stream;
 public class Bank {
 
     private final static Bank bank = new Bank();
-
     private List<User> userList = new ArrayList<>();
     //private List<Account> account = new ArrayList<>();
 
