@@ -61,10 +61,10 @@ public class App {
             switch (select) {
                 case 1:
                     System.out.println("=== 계좌 등록 ===");
-                    System.out.println("소유주 : ");
+                    System.out.print("소유주 : ");
                     String name = sc.next();
                     String pattern = "[0-9,\\-]{3,6}\\-[0-9,\\-]{2,6}\\-[0-9,\\-]";
-                    System.out.println("계좌번호( ex.xxx-xxxxxx-x ) : ");
+                    System.out.print("계좌번호( ex) xxx-xxxxxx-x ) : ");
                     String accountNum = sc.next();
                     if(!Pattern.matches(pattern,accountNum)){
                         System.out.println("계좌번호 형식이 틀렸습니다!");
@@ -73,9 +73,9 @@ public class App {
                     if(!bank.checkToUsableBankNum(accountNum)){
                         return;
                     }
-                    System.out.println("계좌 비밀번호 설정 :");
+                    System.out.print("계좌 비밀번호 설정 :");
                     String pwd = sc.next();
-                    System.out.println("은행명 :");
+                    System.out.print("은행명 :");
                     String bankName = sc.next();
 
                     User user = new User(name,0,accountNum,bankName,pwd);
@@ -104,13 +104,13 @@ public class App {
 
                     if (num2 == 1) {
                         // 수정 메서드 호출
-                        System.out.println("수정할 계좌번호를 입력하세요 :");
+                        System.out.print("수정할 계좌번호를 입력하세요 :");
                         String updateAccountNum = sc.next();
                         // 입력한 계좌번호가 DB에 있는지 확인
                         if(!bank.confrimAccountNum(updateAccountNum)){
                             return;
                         }
-                        System.out.println("계좌 비밀번호를 입력하세요 :");
+                        System.out.print("계좌 비밀번호를 입력하세요 :");
                         String updatePwd = sc.next();
                         // 입력한 계좌의 비밀번호가 맞는지 확인
                         if(!bank.confrimAccountPwd(updateAccountNum,updatePwd)){
@@ -122,17 +122,37 @@ public class App {
 
                         if(updateContentNum == 1){
                             // 소유주명 바꾸기
-                            System.out.println("변경할 소유주명 :");
+                            System.out.print("변경할 소유주명 :");
                             String updateUserName = sc.next();
                             bank.updateUserName(updateUserName,updateAccountNum);
 
-                        }else{
+                        }else if(updateContentNum == 2){
                             // 은행명 바꾸기
+                            System.out.print("변경할 은행이름 :");
+                            String updateBankName = sc.next();
+                            bank.updateBankName(updateBankName,updateAccountNum);
+
+                        }else{
+                            System.out.println("잘못된 번호입니다!");
                         }
 
 
                     } else {
                         // 삭제 메서드 호출
+                        System.out.print("삭제할 계좌번호를 입력하세요 :");
+                        String deleteAccountNum = sc.next();
+                        // 입력한 계좌번호가 DB에 있는지 확인
+                        if(!bank.confrimAccountNum(deleteAccountNum)){
+                            return;
+                        }
+                        System.out.print("계좌 비밀번호를 입력하세요 :");
+                        String deletePwd = sc.next();
+                        // 입력한 계좌의 비밀번호가 맞는지 확인
+                        if(!bank.confrimAccountPwd(deleteAccountNum,deletePwd)){
+                            return;
+                        }
+                        //삭제 메서드 호출
+                        bank.deleteAccount(deleteAccountNum);
                     }
                     break;
 
@@ -143,10 +163,19 @@ public class App {
 
                     if (num3 == 1) {
                         // 이름 조회 메서드 호출
+                        System.out.print("조회하실 성함을 입력하세요 :");
+                        String searchName = sc.next();
+                        // 이름 조회 함수 호출
+
+                        if(!bank.searchByUserName(searchName)){
+                            return;
+                        }
+
                     } else if (num3 == 2) {
                         // 계좌번호 조희 메서드 호출
                     } else {
                         // 전체 조회 메서드 호출
+                        bank.showAll();
                     }
                     break;
 
