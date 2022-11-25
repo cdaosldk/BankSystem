@@ -19,6 +19,15 @@ public class User {
         this.stock = stock;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setBankName(String bankName) {
+        this.bankName = bankName;
+    }
+
+    public String getName() {
     public String getName() { // 소유주 조회
         return name;
     }

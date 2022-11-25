@@ -37,7 +37,7 @@ public class App {
     }
 
     public static void bankManager() {
-
+        Bank bank = Bank.getInstance();
         Scanner sc = new Scanner(System.in);
         while (true) {
             // 은행 관리자 화면
@@ -51,17 +51,17 @@ public class App {
             }
             switch (select) {
                 case 1:
+                    System.out.println("=== 계좌 등록 ===");
+                    System.out.print("소유주 : ");
                     Bank bank = Bank.getInstance();
                     System.out.print("=== 계좌 등록 ===");
                     System.out.print("소유주 : ");
                     String name = sc.next();
-
                     String pattern = "[0-9,\\-]{3,6}\\-[0-9,\\-]{2,6}\\-[0-9,\\-]";
-                    System.out.print("계좌번호( ex.xxx-xxxxxx-x ) : ");
-
+                    System.out.print("계좌번호( ex) xxx-xxxxxx-x ) : ");
                     String accountNum = sc.next();
                     if(!Pattern.matches(pattern,accountNum)){
-                        System.out.print("계좌번호 형식이 틀렸습니다!");
+                        System.out.println("계좌번호 형식이 틀렸습니다!");
                         return;
                     }
                     if(!bank.checkToUsableBankNum(accountNum)){
@@ -80,6 +80,22 @@ public class App {
                 case 2:
                     System.out.print("=== 등록계좌 수정 및 삭제 ===");
                     System.out.print("1. 수정 2. 삭제");
+                    System.out.println("=== 입출금 ===");
+                    System.out.println("1. 입금 2. 출금");
+                    int num = sc.nextInt();
+
+                    if (num == 1) {
+                        // 입금 메서드 호출
+                    } else {
+                        // 출금 메서드 호출
+                    }
+
+                    break;
+
+                case 3:
+
+                    System.out.println("=== 등록계좌 수정 및 삭제 ===");
+                    System.out.println("1. 수정 2. 삭제");
                     int num2 = sc.nextInt();
 
                     if (num2 == 1) {
@@ -114,8 +130,55 @@ public class App {
                         }
 
 
+                        System.out.print("수정할 계좌번호를 입력하세요 :");
+                        String updateAccountNum = sc.next();
+                        // 입력한 계좌번호가 DB에 있는지 확인
+                        if(!bank.confrimAccountNum(updateAccountNum)){
+                            return;
+                        }
+                        System.out.print("계좌 비밀번호를 입력하세요 :");
+                        String updatePwd = sc.next();
+                        // 입력한 계좌의 비밀번호가 맞는지 확인
+                        if(!bank.confrimAccountPwd(updateAccountNum,updatePwd)){
+                            return;
+                        }
+                        System.out.println("수정할 정보를 선택하세요!");
+                        System.out.println("1.소유주명, 2.은행");
+                        int updateContentNum = sc.nextInt();
+
+                        if(updateContentNum == 1){
+                            // 소유주명 바꾸기
+                            System.out.print("변경할 소유주명 :");
+                            String updateUserName = sc.next();
+                            bank.updateUserName(updateUserName,updateAccountNum);
+
+                        }else if(updateContentNum == 2){
+                            // 은행명 바꾸기
+                            System.out.print("변경할 은행이름 :");
+                            String updateBankName = sc.next();
+                            bank.updateBankName(updateBankName,updateAccountNum);
+
+                        }else{
+                            System.out.println("잘못된 번호입니다!");
+                        }
+
+
                     } else {
                         // 삭제 메서드 호출
+                        System.out.print("삭제할 계좌번호를 입력하세요 :");
+                        String deleteAccountNum = sc.next();
+                        // 입력한 계좌번호가 DB에 있는지 확인
+                        if(!bank.confrimAccountNum(deleteAccountNum)){
+                            return;
+                        }
+                        System.out.print("계좌 비밀번호를 입력하세요 :");
+                        String deletePwd = sc.next();
+                        // 입력한 계좌의 비밀번호가 맞는지 확인
+                        if(!bank.confrimAccountPwd(deleteAccountNum,deletePwd)){
+                            return;
+                        }
+                        //삭제 메서드 호출
+                        bank.deleteAccount(deleteAccountNum);
                         System.out.print("삭제할 계좌번호를 입력하세요 :");
                         int deleteAccNum = sc.nextInt();
 
@@ -129,15 +192,36 @@ public class App {
                     int num3 = sc.nextInt();
 
                     if (num3 == 1) {
+                        // 이름 조회 메서드 호출
+                        System.out.print("조회하실 성함을 입력하세요 :");
+                        String searchName = sc.next();
+
+                        if(!bank.searchByUserName(searchName)){
+                            return;
+                        }
+
 //                        System.out.println("이름을 입력하세요");
 //                        String name = sc.nextLine();
                     } else if (num3 == 2) {
+                        // 계좌번호 조희 메서드 호출
+                        System.out.print("조회하실 계좌번호를 입력하세요 :");
+                        String serchAccountNum = sc.next();
+                        if(!bank.confrimAccountNum(serchAccountNum)){
+                            return;
+                        }
+                        if(!bank.searchByAccountNum(serchAccountNum)){
+                            return;
+                        }
+                    } else if(num3 == 3) {
 //                        System.out.println("계좌번호를 입력하세요");
 //                        String accNum = sc.nextLine();
 //                        계좌번호로 계좌 클래스 접근, Account 내역 전체 조회
 //                        거래내역 조회 메서드
                     } else {
                         // 전체 조회 메서드 호출
+                        bank.showAll();
+                    }else{
+                        System.out.println("잘못된 번호입니다!");
                     }
                     break;
 
@@ -216,5 +300,10 @@ public class App {
 
             }
         }
+    }
+
+    public static void userInfo () {
+        // 유저정보 관련화면
+        System.out.println("=== USER 정보 ===");
     }
 }
