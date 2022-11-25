@@ -1,3 +1,6 @@
+import service.Bank;
+import vo.Account;
+
 import java.text.DecimalFormat;
 import java.util.Scanner;
 
@@ -76,11 +79,11 @@ public class App {
                     int num = sc.nextInt();
 
                     if (num == 1) {
-                        // 입금 메서드 호출
+                        deposit();
+                        break;
                     } else {
-                        // 출금 메서드 호출
+                        withdraw();
                     }
-
                     break;
 
                 case 3:
@@ -173,4 +176,25 @@ public class App {
         // 유저정보 관련화면
         System.out.println("=== USER 정보 ===");
     }
+    //출금
+    private static void withdraw(){
+        Bank bank = Bank.getInstance();
+        System.out.println("출금할 계좌번호를 입력하세요");
+        Scanner sc = new Scanner(System.in);
+        String inputAccountNum = sc.next();
+        if(!bank.confrimAccountNum(inputAccountNum)){
+            return;
+        }
+        System.out.println("계좌 비밀번호를 입력하세요");
+        String pwd = sc.next();
+        if(!bank.confrimAccountPwd(inputAccountNum,pwd)){
+            return;
+        }
+
+    }
+    //입금
+    private static void deposit() {
+
+    }
+
 }
