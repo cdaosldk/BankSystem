@@ -40,6 +40,7 @@ public class Bank {
     public Boolean checkToUsableBankNum(String bankNum){
 
         if(userList.stream().anyMatch(s->s.getAccountNum().equals(bankNum))){
+            System.out.println("이미 등록된 계좌번호입니다!");
             return false;
         }
         return true;
@@ -64,6 +65,14 @@ public class Bank {
         }
         System.out.println("계좌의 비밀번호가 틀립니다!");
         return false;
+
+    }
+
+    public void updateUserName(String inputAccountNum,String updateUserName){
+
+        int index = userList.indexOf(userList.stream().filter(s -> s.getAccountNum().equals(inputAccountNum)));
+
+        System.out.println(index);
 
     }
 

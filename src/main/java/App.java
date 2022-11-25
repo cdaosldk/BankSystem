@@ -1,5 +1,9 @@
+import service.Bank;
+import vo.User;
+
 import java.text.DecimalFormat;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 import static java.text.NumberFormat.Field.PREFIX;
 
@@ -42,7 +46,7 @@ public class App {
     }
 
     public static void bankManager() {
-
+        Bank bank = Bank.getInstance();
         Scanner sc = new Scanner(System.in);
         while (true) {
             // 은행 관리자 화면
@@ -59,12 +63,24 @@ public class App {
                     System.out.println("=== 계좌 등록 ===");
                     System.out.println("소유주 : ");
                     String name = sc.next();
-                    int seq = 0; // seq?
-                    String accNum = PREFIX+String.format(new DecimalFormat("0000").format(++seq));
-                    System.out.println("계좌번호 : " + accNum);
-//                  정규표현식으로?? String accNum = sc.next();
-                    int amount = 0; // 잔고는 기본값 0원으로 설정하여 저장
-                    System.out.println("등록이 완료되었습니다");
+                    String pattern = "[0-9,\\-]{3,6}\\-[0-9,\\-]{2,6}\\-[0-9,\\-]";
+                    System.out.println("계좌번호( ex.xxx-xxxxxx-x ) : ");
+                    String accountNum = sc.next();
+                    if(!Pattern.matches(pattern,accountNum)){
+                        System.out.println("계좌번호 형식이 틀렸습니다!");
+                        return;
+                    }
+                    if(!bank.checkToUsableBankNum(accountNum)){
+                        return;
+                    }
+                    System.out.println("계좌 비밀번호 설정 :");
+                    String pwd = sc.next();
+                    System.out.println("은행명 :");
+                    String bankName = sc.next();
+
+                    User user = new User(name,0,accountNum,bankName,pwd);
+
+                    bank.addUser(user);
                     break;
 
                 case 2:
@@ -81,12 +97,40 @@ public class App {
                     break;
 
                 case 3:
+
                     System.out.println("=== 등록계좌 수정 및 삭제 ===");
                     System.out.println("1. 수정 2. 삭제");
                     int num2 = sc.nextInt();
 
                     if (num2 == 1) {
                         // 수정 메서드 호출
+                        System.out.println("수정할 계좌번호를 입력하세요 :");
+                        String updateAccountNum = sc.next();
+                        // 입력한 계좌번호가 DB에 있는지 확인
+                        if(!bank.confrimAccountNum(updateAccountNum)){
+                            return;
+                        }
+                        System.out.println("계좌 비밀번호를 입력하세요 :");
+                        String updatePwd = sc.next();
+                        // 입력한 계좌의 비밀번호가 맞는지 확인
+                        if(!bank.confrimAccountPwd(updateAccountNum,updatePwd)){
+                            return;
+                        }
+                        System.out.println("수정할 정보를 선택하세요!");
+                        System.out.println("1.소유주명, 2.은행");
+                        int updateContentNum = sc.nextInt();
+
+                        if(updateContentNum == 1){
+                            // 소유주명 바꾸기
+                            System.out.println("변경할 소유주명 :");
+                            String updateUserName = sc.next();
+                            bank.updateUserName(updateUserName,updateAccountNum);
+
+                        }else{
+                            // 은행명 바꾸기
+                        }
+
+
                     } else {
                         // 삭제 메서드 호출
                     }
