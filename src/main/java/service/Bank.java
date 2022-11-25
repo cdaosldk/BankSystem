@@ -1,6 +1,7 @@
 package service;
 
 
+import vo.Account;
 import vo.User;
 
 import java.util.ArrayList;
@@ -11,9 +12,9 @@ public class Bank {
 
     private final static Bank bank = new Bank();
     private List<User> userList = new ArrayList<>();
-    //private List<Account> account = new ArrayList<>();
+    private List<Account> accountList = new ArrayList<>();
 
-    //Bank하나의 객체를 유지하기 위한 메서드
+    //Bank 하나의 객체를 유지하기 위한 메서드
     public static Bank getInstance(){
 
         if(bank == null){
@@ -40,12 +41,21 @@ public class Bank {
     public Boolean checkToUsableBankNum(String bankNum){
 
         if(userList.stream().anyMatch(s->s.getAccountNum().equals(bankNum))){
+            System.out.println("이미 등록된 계좌번호입니다!");
             return false;
         }
         return true;
     }
 
-    public Boolean confrimAccountNum(String inputAccountNum){
+    public void updateUserName(String inputAccountNum,String updateUserName){
+
+        int index = userList.indexOf(userList.stream().filter(s -> s.getAccountNum().equals(inputAccountNum)));
+
+        System.out.println(index);
+
+    }
+
+    public boolean confirmAccountNum(String inputAccountNum){
 
         if(userList.stream().anyMatch(s -> s.getAccountNum().equals(inputAccountNum))){
             return true;
@@ -54,7 +64,7 @@ public class Bank {
         return false;
     }
 
-    public Boolean confrimAccountPwd(String inputAccountNum, String pwd){
+    public Boolean confirmAccountPwd(String inputAccountNum, String pwd){
 
         Stream<User> userInfo = userList.stream().filter(s -> s.getAccountNum().equals(inputAccountNum));
 
@@ -66,5 +76,16 @@ public class Bank {
         return false;
 
     }
+    // 입출금 메서드
+    public void showAccount() {
+        System.out.print(userList.get().getName()+"님 ");
+        for(int i=0;i<userList.size();i++){
+            System.out.println("------------");
+            System.out.println(userList.get(i).getStock()+"원 ");
+        }
+    }
 
+    public void deposit(Account account) {
+        accountList.add(account);
+    }
 }

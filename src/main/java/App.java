@@ -41,9 +41,9 @@ public class App {
         Scanner sc = new Scanner(System.in);
         while (true) {
             // 은행 관리자 화면
-            System.out.println("=== 은행 관리 ===");
-            System.out.println("원하시는 메뉴에 해당하는 번호를 입력하세요.");
-            System.out.println("1. 계좌 등록 2. 등록계좌 수정/삭제 3. 계좌 조회(소유자/계좌번호/전체) 4. 이전");
+            System.out.print("=== 은행 관리 ===");
+            System.out.print("원하시는 메뉴에 해당하는 번호를 입력하세요.");
+            System.out.print("1. 계좌 등록 2. 등록계좌 수정/삭제 3. 계좌 조회(소유자/계좌번호/전체) 4. 이전");
             int select = sc.nextInt();
 
             if (select == 4) {
@@ -52,24 +52,24 @@ public class App {
             switch (select) {
                 case 1:
                     Bank bank = Bank.getInstance();
-                    System.out.println("=== 계좌 등록 ===");
-                    System.out.println("소유주 : ");
+                    System.out.print("=== 계좌 등록 ===");
+                    System.out.print("소유주 : ");
                     String name = sc.next();
 
                     String pattern = "[0-9,\\-]{3,6}\\-[0-9,\\-]{2,6}\\-[0-9,\\-]";
-                    System.out.println("계좌번호( ex.xxx-xxxxxx-x ) : ");
+                    System.out.print("계좌번호( ex.xxx-xxxxxx-x ) : ");
 
                     String accountNum = sc.next();
                     if(!Pattern.matches(pattern,accountNum)){
-                        System.out.println("계좌번호 형식이 틀렸습니다!");
+                        System.out.print("계좌번호 형식이 틀렸습니다!");
                         return;
                     }
                     if(!bank.checkToUsableBankNum(accountNum)){
                         return;
                     }
-                    System.out.println("계좌 비밀번호 설정 :");
+                    System.out.print("계좌 비밀번호 설정 :");
                     String pwd = sc.next();
-                    System.out.println("은행명 :");
+                    System.out.print("은행명 :");
                     String bankName = sc.next();
 
                     User user = new User(name,0,accountNum,bankName,pwd);
@@ -78,37 +78,37 @@ public class App {
                     break;
 
                 case 2:
-                    System.out.println("=== 등록계좌 수정 및 삭제 ===");
-                    System.out.println("1. 수정 2. 삭제");
+                    System.out.print("=== 등록계좌 수정 및 삭제 ===");
+                    System.out.print("1. 수정 2. 삭제");
                     int num2 = sc.nextInt();
 
                     if (num2 == 1) {
                         // 수정 메서드 호출
-                        System.out.println("수정할 계좌번호를 입력하세요 :");
+                        System.out.print("수정할 계좌번호를 입력하세요 :");
                         String updateAccountNum = sc.next();
                         // 입력한 계좌번호가 DB에 있는지 확인
-                        if(!bank.confrimAccountNum(updateAccountNum)){
+                        if(!bank.confirmAccountNum(updateAccountNum)){
                             return;
                         }
-                        System.out.println("계좌 비밀번호를 입력하세요 :");
+                        System.out.print("계좌 비밀번호를 입력하세요 :");
                         String updatePwd = sc.next();
                         // 입력한 계좌의 비밀번호가 맞는지 확인
-                        if(!bank.confrimAccountPwd(updateAccountNum,updatePwd)){
+                        if(!bank.confirmAccountPwd(updateAccountNum,updatePwd)){
                             return;
                         }
-                        System.out.println("수정할 정보를 선택하세요!");
-                        System.out.println("1.소유주명, 2.은행");
+                        System.out.print("수정할 정보를 선택하세요!");
+                        System.out.print("1.소유주명, 2.은행");
                         int updateContentNum = sc.nextInt();
 
                         if(updateContentNum == 1){
                             // 소유주명 바꾸기
-                            System.out.println("변경할 소유주명 :");
+                            System.out.print("변경할 소유주명 :");
                             String updateUserName = sc.next();
                             bank.updateUserName(updateUserName,updateAccountNum);
 
                         }else{
                             // 은행명 바꾸기
-                            System.out.println("변경할 은행명 : ");
+                            System.out.print("변경할 은행명 : ");
                             String updateBankName = sc.next();
                             bank.updateBankName(updateBankName,updateAccountNum);
                         }
@@ -116,7 +116,7 @@ public class App {
 
                     } else {
                         // 삭제 메서드 호출
-                        System.out.println("삭제할 계좌번호를 입력하세요 :");
+                        System.out.print("삭제할 계좌번호를 입력하세요 :");
                         int deleteAccNum = sc.nextInt();
 
 
@@ -124,8 +124,8 @@ public class App {
                     break;
 
                 case 3:
-                    System.out.println("=== 등록계좌 조회 ===");
-                    System.out.println("1. 이름으로 조회 2. 계좌번호로 조회 3. 전체 조회");
+                    System.out.print("=== 등록계좌 조회 ===");
+                    System.out.print("1. 이름으로 조회 2. 계좌번호로 조회 3. 전체 조회");
                     int num3 = sc.nextInt();
 
                     if (num3 == 1) {
@@ -165,10 +165,16 @@ public class App {
 
             switch (select) {
                 case 1:
-                    System.out.println("이름을 입력하세요");
-                    String name = sc.nextLine();
-//                    소유주 이름으로 된 계좌조회 메서드 호출
-//                    계좌 =
+                    System.out.println("=== 등록계좌 조회 ===");
+                    System.out.println("1. 이름으로 조회 2. 계좌번호로 조회 3. 전체 조회");
+                    int num3 = sc.nextInt();
+
+                    System.out.print("조회하실 성함을 입력하세요 :");
+                    String searchName = sc.next();
+                    // 이름 조회 함수 호출
+
+                    if(!bank.searchByUserName(searchName)){
+                        return;
                     System.out.println("비밀번호를 입력하세요.");
 //                    System.out.println("현재 잔액은 " + 잔액 + " 원 입니다.");
 //                    비밀번호를 틀릴 경우
@@ -193,6 +199,8 @@ public class App {
                         System.out.println("당신의 계좌는 " + accNum + "입니다.");
                         System.out.println("현재 잔액" + bank.getStock);
                         System.out.println("입금할 금액을 입력하세요");
+                        int Won = sc.nextInt();
+                        System.out.println("입금되었습니다.");
                     } else {
                         // retrun Bank.출금메서드 호출
                         System.out.println("계좌번호를 입력하세요");
