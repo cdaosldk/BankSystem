@@ -2,6 +2,7 @@ package service;
 
 
 import org.w3c.dom.ls.LSOutput;
+import vo.Account;
 import vo.User;
 
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ public class Bank {
 
     private final static Bank bank = new Bank();
     private List<User> userList = new ArrayList<>();
-    //private List<Account> account = new ArrayList<>();
+    private List<Account> accountList = new ArrayList<>();
 
     //Bank하나의 객체를 유지하기 위한 메서드
     public static Bank getInstance(){

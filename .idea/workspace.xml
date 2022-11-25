@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4e04b665-97b1-4ef1-9963-700cf19928bd" name="변경" comment="4:20pm master 체크아웃용">
+    <list default="true" id="4e04b665-97b1-4ef1-9963-700cf19928bd" name="변경" comment="다시 올려보는 브런치">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/App.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/service/Bank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/Bank.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/vo/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vo/Account.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/vo/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vo/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,6 +59,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="애플리케이션.App" />
+        <item itemvalue="애플리케이션.App" />
       </list>
     </recent_temporary>
   </component>
@@ -98,7 +97,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="LIM" />
+                        <option value="origin/master" />
                       </list>
                     </value>
                   </entry>
