@@ -6,13 +6,15 @@ import static java.text.NumberFormat.Field.PREFIX;
 public class App {
 //    private static final scan = new Scanner();
     Scanner sc = new Scanner(System.in);
+
+    //은행시스템 초기화면(은행관리, 거래내역, 유저정보, 종료)
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         while (true) {
             // main 화면, 각 클래스와 관련된 내용으로 연결되고 이후 접속 시 관련 메뉴를 한 번 더 볼 수 있도록 설정
             System.out.println("=== BankSystem에 오신 것을 환영합니다 ===");
             System.out.println("원하시는 메뉴에 해당하는 번호를 입력하세요.");
-            System.out.println("1. 은행 관리 2. 거래내역 관리 3. USER 정보 4. 종료");
+            System.out.println("1.은행 관리 2.거래내역 관리 3.USER 정보 4.종료");
             int select = sc.nextInt();
 
             if (select == 4) {
@@ -41,6 +43,7 @@ public class App {
         }
     }
 
+    //은행관리 시스템
     public static void bankManager() {
 
         Scanner sc = new Scanner(System.in);
@@ -114,6 +117,8 @@ public class App {
             }
         }
     }
+
+    //거래내역 시스템
     public static void moneyList () {
         Scanner sc = new Scanner(System.in);
 //        String accNum = 계좌번호 호출
@@ -163,6 +168,7 @@ public class App {
         }
     }
 
+    //
     public static void userInfo () {
         // 유저정보 관련화면
         System.out.println("=== USER 정보 ===");

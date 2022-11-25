@@ -27,6 +27,7 @@ public class Bank {
         userList.add(user);
     }
 
+    //계좌목록들 조회하는 부분
     public void showAll(){
         for(int i=0;i<userList.size();i++){
             System.out.println("------------");
@@ -37,6 +38,7 @@ public class Bank {
         }
     }
 
+    //입력된 정보가 유저리스트에서 있는지 없는지 확인하는 부분 (중복확인)
     public Boolean checkToUsableBankNum(String bankNum){
 
         if(userList.stream().anyMatch(s->s.getAccountNum().equals(bankNum))){
@@ -44,7 +46,7 @@ public class Bank {
         }
         return true;
     }
-
+    //
     public Boolean confrimAccountNum(String inputAccountNum){
 
         if(userList.stream().anyMatch(s -> s.getAccountNum().equals(inputAccountNum))){
@@ -54,6 +56,7 @@ public class Bank {
         return false;
     }
 
+    //입력된 비밀번호와 비밀번호가 같은지 확인하는 부분
     public Boolean confrimAccountPwd(String inputAccountNum, String pwd){
 
         Stream<User> userInfo = userList.stream().filter(s -> s.getAccountNum().equals(inputAccountNum));

@@ -2,7 +2,7 @@ package vo;
 public class User {
 
     private String name; //유저 이름
-    private int stock;   //
+    private int stock;   // 잔고
     private String accountNum;  //계좌번호
     private String bankName;   //은행명
     private String pwd;       //비밀번호
