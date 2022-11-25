@@ -1,4 +1,5 @@
 import service.Bank;
+import vo.Account;
 import vo.User;
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -82,6 +83,23 @@ public class App {
 
                     if (num == 1) {
                         // 입금 메서드 호출
+                        System.out.println("입금할 계좌번호를 입력하세요: ");
+                        String updateAccountNum = sc.next();
+                        if(!bank.confrimAccountNum(updateAccountNum)){
+                            return;
+                        }
+                        System.out.print("계좌 비밀번호를 입력하세요 :");
+                        String updatePwd = sc.next();
+                        // 입력한 계좌의 비밀번호가 맞는지 확인
+                        if(!bank.confrimAccountPwd(updateAccountNum,updatePwd)){
+                            return;
+                        }
+                        System.out.println("입금할 금액을 입력하세요");
+                        int amount = sc.nextInt();
+                        Account account = new Account(amount);
+                        account.deposit(amount);//입금처리
+                        System.out.println("입금 성공");
+
                     } else {
                         // 출금 메서드 호출
                     }
@@ -236,6 +254,8 @@ public class App {
             }
         }
     }
+
+
 
     public static void userInfo () {
         // 유저정보 관련화면

@@ -14,10 +14,7 @@ public class Account {
 
 
     //생성자
-    public Account(LocalDateTime timeHistory, String plusCash, String minusCash, int amount){
-        this.timeHistory = timeHistory;
-        this.plusCash = plusCash;
-        this.minusCash = minusCash;
+    public Account(int amount){
         this.amount = amount;
     }
 
@@ -30,10 +27,10 @@ public class Account {
     public int getAmount(){return amount;}
 
 
-//    //입금
-//    public void deposit(int amount){
-//        this.stock+=amount;
-//    }
+    //입금
+    public void deposit(int money){
+        this.amount+=money;
+    }
 //    //출금
 //    public int withdraw(int amount)
 //            throws Exception{//throw:생성한 예외 객체를 호출한 쪽을 넘김

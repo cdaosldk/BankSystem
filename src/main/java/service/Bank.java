@@ -129,9 +129,12 @@ public class Bank {
     }
 
 
+//    public void deposit(int money){
+//        this.+=money;
+//    }
 
     //입금액 목록
-    public void deposit(Account account){
+    public void depositmony(Account account){
 
         accountList.add(account);
     }
