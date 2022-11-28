@@ -1,4 +1,5 @@
 import service.Bank;
+import vo.Account;
 import vo.User;
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -53,7 +54,7 @@ public class App {
             switch (select) {
                 case 1:
                     System.out.println("=== 계좌 등록 ===");
-                    System.out.println("소유주 : ");
+                    System.out.print("소유주 : ");
                     String name = sc.next();
                     String pattern = "[0-9,\\-]{3,6}\\-[0-9,\\-]{2,6}\\-[0-9,\\-]";
                     System.out.print("계좌번호( ex) xxx-xxxxxx-x ) : ");
@@ -122,7 +123,7 @@ public class App {
                         if (!bank.confirmAccountNum(deleteAccountNum)) {
                             return;
                         }
-                        System.out.println("계좌 비밀번호를 입력하세요 :");
+                        System.out.print("계좌 비밀번호를 입력하세요 :");
                         String deletePwd = sc.next();
                         // 입력한 계좌의 비밀번호가 맞는지 확인
                         if (!bank.confirmAccountPwd(deleteAccountNum, deletePwd)) {
@@ -130,8 +131,6 @@ public class App {
                         }
                         //삭제 메서드 호출
                         bank.deleteAccount(deleteAccountNum);
-                        System.out.println("삭제할 계좌번호를 입력하세요 :");
-                        int deleteAccNum = sc.nextInt();
                     }
                     break;
 
@@ -142,25 +141,26 @@ public class App {
 
                     if (num3 == 1) {
                         // 이름 조회 메서드 호출
-                        System.out.println("조회하실 성함을 입력하세요 :");
+                        System.out.print("조회하실 성함을 입력하세요 :");
                         String searchName = sc.next();
 
-                        if (!bank.searchByUserName(searchName)) {
+                        if (!bank.confirmAccountName(searchName)) {
                             return;
                         }
+                        bank.searchByUserName(searchName);
 
 
                     } else if (num3 == 2) {
                         // 계좌번호 조희 메서드 호출
-                        System.out.println("조회하실 계좌번호를 입력하세요 :");
+                        System.out.print("조회하실 계좌번호를 입력하세요 :");
                         String searchAccountNum = sc.next();
                         //search
                         if (!bank.confirmAccountNum(searchAccountNum)) {
                             return;
                         }
-                        if (!bank.searchByAccountNum(searchAccountNum)) {
-                            return;
-                        }
+                         bank.searchByAccountNum(searchAccountNum);
+
+
                     } else {
                         // 전체 조회 메서드 호출
                         bank.showAll();
@@ -195,18 +195,32 @@ public class App {
                 case 1:
                     // 잔고확인 메서드
                     System.out.println("=== 계좌잔고 조회 ===");
-                    System.out.println("이름을 입력하세요"); //이름을 입력하세요
+                    System.out.print("이름을 입력하세요 : "); //이름을 입력하세요
                     String name = sc.nextLine();
-
-
                     break;
                 case 2:
                     System.out.println("=== 거래내역 조회 ===");
-                    System.out.println("이름을 입력하세요");
+                    System.out.print("이름을 입력하세요 : ");
                     String accountName = sc.next();
-                    if (!bank.searchNameOnly(accountName)) {
+                    if (!bank.confirmAccountName(accountName)) {
                         return;
                     }
+                    System.out.print("계좌번호를 입력하세요 : ");
+                    String AccountNumCaseTwo = sc.next();
+                    if (!bank.confirmAccountNum(AccountNumCaseTwo)) {
+                        return;
+                    }
+
+                    System.out.print("계좌비밀번호를 입력하세요 : ");
+                    String serchPwd = sc.next();
+                    if (!bank.confirmAccountPwd(AccountNumCaseTwo, serchPwd)) {
+                        return;
+                    }
+
+                    if(!bank.showAccountList(accountName,AccountNumCaseTwo)){
+                        return;
+                    }
+
                     break;
                 case 3:
                     System.out.println("=== 입출금 ===");
@@ -215,10 +229,10 @@ public class App {
 
                     if (num == 1) {
                         // return Bank.입금메서드 호출
-                        System.out.println("계좌번호를 입력하세요");
+                        System.out.print("계좌번호를 입력하세요 : ");
                         String AccountNum = sc.next();
                         //search 계좌번호
-                        if (!bank.searchByAccountNum(AccountNum)) {
+                        if (!bank.confirmAccountNum(AccountNum)) {
                             return;
                         }
                         System.out.print("계좌 비밀번호를 입력하세요 :");
@@ -227,15 +241,19 @@ public class App {
                         if (!bank.confirmAccountPwd(AccountNum, updatePwd)) {
                             return;
                         }
-                        System.out.println("입금할 금액을 입력하세요");
+                        System.out.print("입금할 금액을 입력하세요 : ");
                         int money = sc.nextInt();
                         bank.deposit(AccountNum,money);
-                    } else {
+                        System.out.println("입금되었습니다.");
+                        Account account = new Account("입금",money,AccountNum);
+                        bank.addDepositOrWithdrawList(account);
+
+                    } else if(num == 2){
                         // return Bank.출금메서드 호출
-                        System.out.println("계좌번호를 입력하세요");
+                        System.out.print("계좌번호를 입력하세요 : ");
                         String AccountNum = sc.next();
                         //search 계좌번호
-                        if (!bank.searchByAccountNum(AccountNum)) {
+                        if (!bank.confirmAccountNum(AccountNum)) {
                             return;
                         }
                         System.out.print("계좌 비밀번호를 입력하세요 :");
@@ -244,9 +262,15 @@ public class App {
                         if (!bank.confirmAccountPwd(AccountNum, updatePwd)) {
                             return;
                         }
-                        System.out.println("출금할 금액을 입력하세요");
+                        System.out.print("출금할 금액을 입력하세요 : ");
                         int money = sc.nextInt();
                         bank.withdraw(AccountNum,money);
+                        System.out.println("출금되었습니다.");
+                        Account account = new Account("출금",money,AccountNum);
+                        bank.addDepositOrWithdrawList(account);
+                    }else{
+                        System.out.println("잘못된 번호입니다!!");
+                        return;
                     }
                     break;
                 default:

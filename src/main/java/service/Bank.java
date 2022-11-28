@@ -2,6 +2,8 @@ package service;
 
 import vo.Account;
 import vo.User;
+
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
@@ -55,11 +57,20 @@ public class Bank {
         return false;
     }
 
+    public boolean confirmAccountName(String inputAccountName){
+
+        if(userList.stream().anyMatch(s -> s.getName().equals(inputAccountName))){
+            return true;
+        }
+        System.out.println("존재하지 않는 회원입니다!");
+        return false;
+    }
+
+
+
     public boolean confirmAccountPwd(String inputAccountNum, String pwd){
 
         Stream<User> userInfo = userList.stream().filter(s -> s.getAccountNum().equals(inputAccountNum));
-
-
         if(userInfo.anyMatch(s -> s.getPwd().equals(pwd))){
             return true;
         }
@@ -105,41 +116,19 @@ public class Bank {
         }
     }
 
-    public boolean searchByUserName(String searchUserName){
+
+    public void searchByUserName(String searchUserName){
         Stream<User> searchUser = userList.stream().filter(s -> s.getName().equals(searchUserName));
-        //위에 선언한 스트림으로 공백일 때 계좌 없다고 하고 싶은데 필터로 찾지 못해도 무슨 값이 담기는지 봐도 모르겠음..!!
-        if(!userList.stream().anyMatch(s -> s.getName().equals(searchUserName))){
-            System.out.println(searchUserName+"님으로 등록된 계좌가 없습니다!");
-            return false;
-        }
         searchUser.forEach(u -> System.out.println("--------\n"+u.getName()+" "+u.getAccountNum()+ " \n"+u.getStock()+"원 \n"+u.getBankName()+" 은행"));
-        return true;
     }
 
-    public boolean searchByAccountNum(String searchAccountNum){
+    public void searchByAccountNum(String searchAccountNum){
+
         Stream<User> searchUser = userList.stream().filter(s -> s.getAccountNum().equals(searchAccountNum));
-        //위에 선언한 스트림으로 공백일 때 계좌 없다고 하고 싶은데 필터로 찾지 못해도 무슨 값이 담기는지 봐도 모르겠음..!!
-        if(!userList.stream().anyMatch(s -> s.getAccountNum().equals(searchAccountNum))){
-            System.out.println(searchAccountNum+"번호로 등록된 계좌가 없습니다!");
-            return false;
-        }
         searchUser.forEach(u -> System.out.println("--------\n"+u.getName()+" "+u.getAccountNum()+ " \n"+u.getStock()+"원 \n"+u.getBankName()+" 은행"));
-        return true;
+
     }
 
-    public boolean searchNameOnly(String accountName) {
-        Stream<User> searchUser = userList.stream().filter(s -> s.getName().equals(accountName));
-        if (!userList.stream().anyMatch(s -> s.getName().equals(accountName))) {
-            System.out.println(accountName + "님으로 등록된 계좌가 없습니다!");
-            return false;
-        }
-        searchUser.forEach(u -> System.out.println(u.getName() + "님, " + "계좌번호" + u.getAccountNum()));
-        System.out.println("------------");
-        for (int i = 0; i < accountList.size(); i++) {
-            System.out.print("거래일자 및 시간 : " + accountList.get(i).getTimeHistory() + "현재 잔액 : " + userList.get(i).getStock() + "원 ");
-        }
-        return true;
-    }
 // 입출금 메서드
     public void deposit(String AccountNum, int money) {
         if (money == 0) {
@@ -165,5 +154,25 @@ public class Bank {
                 break;
             }
         }
+    }
+
+    public void addDepositOrWithdrawList(Account account){
+        LocalDateTime localDateTime = LocalDateTime.now();
+        account.setTimeHistory(localDateTime);
+        accountList.add(account);
+    }
+
+    public boolean showAccountList(String userName,String accountNum){
+
+        Stream<Account> accountListUser = accountList.stream().filter(s -> s.getAccountNum().equals(accountNum));
+
+        if(!accountList.stream().anyMatch(s -> s.getAccountNum().equals(accountNum))){
+            System.out.println(accountNum+" 계좌의 입출금 내역이 없습니다!");
+            return false;
+        }
+        System.out.println("=== "+userName+"님의 " +accountNum+" 계좌 입출금 거래내역 ===");
+        accountListUser.forEach(s -> System.out.println(s.getPlusOrMinus()+" "+s.getAmount()+"원 "+s.getTimeHistory()));
+        System.out.println("==========================");
+        return true;
     }
 }
