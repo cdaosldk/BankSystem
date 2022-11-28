@@ -198,7 +198,28 @@ public class App {
                     // 잔고확인 메서드
                     System.out.println("=== 계좌잔고 조회 ===");
                     System.out.print("이름을 입력하세요 : "); //이름을 입력하세요
-                    String name = sc.nextLine();
+                    String searchNameSt = sc.next();
+                    System.out.println("계좌목록들 입니다");
+                    if(!bank.confirmAccountName(searchNameSt)){
+                        return;
+                    }
+                    bank.searchByUserNameList(searchNameSt);
+                    System.out.print("조회하실 계좌번호를 입력하세요 :");
+                    String searchAccountNum = sc.next();
+                    //search
+                    if (!bank.confirmAccountNum(searchAccountNum)) {
+                        return;
+                    }
+                    System.out.print("계좌 비밀번호를 입력하세요 :");
+                    String searchPwd = sc.next();
+                    // 입력한 계좌의 비밀번호가 맞는지 확인
+                    if (!bank.confirmAccountPwd(searchAccountNum, searchPwd)) {
+                        return;
+                    }
+                    bank.searchAccountStock(searchAccountNum);
+
+
+
                     break;
                 case 2:
                     System.out.println("=== 거래내역 조회 ===");
@@ -281,4 +302,5 @@ public class App {
             }
         }
     }
+
 }
