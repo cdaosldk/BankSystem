@@ -3,30 +3,40 @@ package vo;
 import java.time.LocalDateTime;
 
     public class Account {
+
+        private String accountNum;
         private LocalDateTime timeHistory;
-        private int plusCash;
-        private int minusCash;
+
+        private String plusOrMinus;
+
         private int amount;
 
-    //생성자
-    public Account(int amount, LocalDateTime timeHistory){
-        this.amount = amount;
-        this.timeHistory = timeHistory;
-    }
-
-    //메소드
-    public LocalDateTime getTimeHistory(LocalDateTime timeHistory) {
-        return timeHistory;
-    }
-    public int getAmount(){return amount;}
-
-    public void setDate(LocalDateTime timeHistory) {
-        this.timeHistory = timeHistory;
-    }
-
-    public LocalDateTime getDate() {
-            return timeHistory;
+        //   날짜/시간, 입출금 +-, 입력금액
+        public Account( String plusOrMinus,int amount,String accountNum) {
+//            this.timeHistory = timeHistory;
+            this.accountNum = accountNum;
+            this.plusOrMinus = plusOrMinus;
+            this.amount = amount;
         }
 
+        public LocalDateTime getTimeHistory() { return timeHistory;};
 
+        public String getPlusOrMinus() {
+            return plusOrMinus;
+        }
+
+        public int getAmount() {
+            return amount;
+        }
+
+        public String getAccountNum() {
+            return accountNum;
+        }
+
+        public void setTimeHistory(LocalDateTime timeHistory) {
+            this.timeHistory = timeHistory;
+        }
+        //        public int getPlusCash() { return user};
+//
+//        public int getAmount() { return amount;};
 }
