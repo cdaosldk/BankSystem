@@ -142,9 +142,13 @@ public class Bank {
     }
 // 입출금 메서드
     public void deposit(String AccountNum, int money) {
+        if (money == 0) {
+            System.out.println("금액을 다시 입력해주세요");
+        }
         for (int i = 0; i < userList.size(); i++) {
             if (userList.get(i).getAccountNum().equals(AccountNum)) {
                 userList.get(i).addStock(money);
+                System.out.println("입금되었습니다.");
                 break;
                 }
             }
@@ -152,7 +156,12 @@ public class Bank {
     public void withdraw(String AccountNum, int money) {
         for (int i = 0; i < userList.size(); i++) {
             if (userList.get(i).getAccountNum().equals(AccountNum)) {
-                userList.get(i).subtractStock(money);
+                if(userList.get(i).getStock() <= money) {
+                    System.out.println("잔고가 부족합니다");
+                } else if( userList.get(i).getStock() >= money) {
+                    userList.get(i).subtractStock(money);
+                    System.out.println("출금되었습니다.");
+                }
                 break;
             }
         }

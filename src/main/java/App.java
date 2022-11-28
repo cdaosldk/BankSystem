@@ -230,7 +230,6 @@ public class App {
                         System.out.println("입금할 금액을 입력하세요");
                         int money = sc.nextInt();
                         bank.deposit(AccountNum,money);
-                        System.out.println("입금되었습니다.");
                     } else {
                         // return Bank.출금메서드 호출
                         System.out.println("계좌번호를 입력하세요");
@@ -248,7 +247,6 @@ public class App {
                         System.out.println("출금할 금액을 입력하세요");
                         int money = sc.nextInt();
                         bank.withdraw(AccountNum,money);
-                        System.out.println("출금되었습니다.");
                     }
                     break;
                 default:
