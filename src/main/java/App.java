@@ -222,11 +222,15 @@ public class App {
                     System.out.println("=== 거래내역 조회 ===");
                     System.out.print("이름을 입력하세요 : ");
                     String accountName = sc.next();
+
+
                     if (!bank.confirmAccountName(accountName)) {
                         return;
                     }
                     System.out.print("계좌번호를 입력하세요 : ");
                     String AccountNumCaseTwo = sc.next();
+
+
                     if (!bank.confirmAccountNum(AccountNumCaseTwo)) {
                         return;
                     }
