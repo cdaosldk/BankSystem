@@ -128,10 +128,14 @@ public class Bank {
         return true;
     }
 
-
-//    public void deposit(int money){
-//        this.+=money;
-//    }
+    public void deposit(String AccountNum,int money){
+        for(int i = 0; i < userList.size(); i++){
+            if (userList.get(i).getAccountNum().equals(AccountNum)){
+                userList.get(i).setStock(money);
+                break;
+            }
+        }
+    }
 
     //입금액 목록
     public void depositmony(Account account){

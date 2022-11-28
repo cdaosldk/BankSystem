@@ -12,6 +12,8 @@ public class Account {
     private String minusCash; //출금액
     private int amount; //입력금액
 
+    private User user;
+
 
     //생성자
     public Account(int amount){
@@ -26,10 +28,15 @@ public class Account {
     public String getMinusCash(){return minusCash;}
     public int getAmount(){return amount;}
 
+    public void abcd(){
+        int a = amount;
+        int b = user.getStock();
+        user.setStock(a+b);
+    }
 
     //입금
-    public void deposit(int money){
-        this.amount+=money;
+    public void deposit(int amount){
+        this.amount+=amount;
     }
 //    //출금
 //    public int withdraw(int amount)

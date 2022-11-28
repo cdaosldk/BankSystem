@@ -7,6 +7,16 @@ public class User {
     private String bankName;   //은행명
     private String pwd;       //비밀번호
 
+    private Account account;
+
+    public User() {
+        this.name = name;
+        this.stock = stock;
+        this.accountNum = accountNum;
+        this.bankName = bankName;
+        this.pwd = pwd;
+    }
+
     public User(String name,int stock ,String accountNum, String bankName, String pwd) {
         this.name = name;
         this.stock = stock;
@@ -46,4 +56,16 @@ public class User {
     public String getPwd() {
         return pwd;
     }
+
+    public void abcde(int amount){
+        int a = account.getAmount();
+        int b = getStock();
+        setStock(a+b);
+    }
+
+//    public void abcd(){
+//        int a = account.getAmount();
+//        int b = getStock();
+//        setStock(a+b);
+//    }
 }
