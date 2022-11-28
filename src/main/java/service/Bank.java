@@ -148,6 +148,7 @@ public class Bank {
                     System.out.println("잔고가 부족합니다");
                 } else if( userList.get(i).getStock() >= money) {
                     userList.get(i).subtractStock(money);
+                    System.out.println("출금되었습니다.");
                 }
                 break;
             }

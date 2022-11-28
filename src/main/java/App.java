@@ -54,7 +54,7 @@ public class App {
             switch (select) {
                 case 1:
                     System.out.println("=== 계좌 등록 ===");
-                    System.out.println("소유주 : ");
+                    System.out.print("소유주 : ");
                     String name = sc.next();
                     String pattern = "[0-9,\\-]{3,6}\\-[0-9,\\-]{2,6}\\-[0-9,\\-]";
                     System.out.print("계좌번호( ex) xxx-xxxxxx-x ) : ");
@@ -99,7 +99,7 @@ public class App {
                             return;
                         }
                         System.out.print("수정할 정보를 선택하세요!");
-                        System.out.print("1.소유주명, 2.은행");
+                        System.out.println("1.소유주명, 2.은행");
                         int updateContentNum = sc.nextInt();
 
                         if (updateContentNum == 1) {
@@ -123,16 +123,13 @@ public class App {
                         if (!bank.confirmAccountNum(deleteAccountNum)) {
                             return;
                         }
-                        System.out.println("계좌 비밀번호를 입력하세요 :");
+                        System.out.print("계좌 비밀번호를 입력하세요 :");
                         String deletePwd = sc.next();
                         // 입력한 계좌의 비밀번호가 맞는지 확인
                         if (!bank.confirmAccountPwd(deleteAccountNum, deletePwd)) {
                             return;
                         }
-                        //삭제 메서드 호출
                         bank.deleteAccount(deleteAccountNum);
-                        System.out.println("삭제할 계좌번호를 입력하세요 :");
-                        int deleteAccNum = sc.nextInt();
                     }
                     break;
 
@@ -288,7 +285,6 @@ public class App {
                         System.out.print("출금할 금액을 입력하세요 : ");
                         int money = sc.nextInt();
                         bank.withdraw(AccountNum,money);
-                        System.out.println("출금되었습니다.");
                         Account account = new Account("출금",money,AccountNum);
                         bank.addDepositOrWithdrawList(account);
                     }else{
