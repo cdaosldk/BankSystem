@@ -57,10 +57,8 @@ public class User {
         return pwd;
     }
 
-    public void abcde(int amount){
-        int a = account.getAmount();
-        int b = getStock();
-        setStock(a+b);
+    public void addStock(int money){
+        this.stock += money;
     }
 
 //    public void abcd(){
