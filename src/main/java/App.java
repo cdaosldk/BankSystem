@@ -151,6 +151,7 @@ public class App {
                         if(!bank.searchByUserName(searchName)){
                             return;
                         }
+                        bank.showAccount();
 
 
                     } else if (num3 == 2) {
@@ -199,7 +200,26 @@ public class App {
                     // 잔고확인 메서드
                     System.out.println("=== 계좌잔고 조회 ===");
                     System.out.println("이름을 입력하세요"); //이름을 입력하세요
-                    String name = sc.nextLine();
+                    String searchNameSt = sc.next();
+                    if(!bank.searchAcStNum(searchNameSt)){
+                        return;
+                    }
+                    System.out.println("계좌목록들 입니다");
+                    System.out.println("조회할 계좌를 입력해주시오");
+                    String AcSt = sc.next();
+                    if(!bank.searchAcNum(AcSt)){
+                        return;
+                    }
+                    System.out.print("계좌 비밀번호를 입력하세요 :");
+                    String searchPwd = sc.next();
+                    // 입력한 계좌의 비밀번호가 맞는지 확인
+                    if (!bank.confirmAccountPwd(AcSt, searchPwd)) {
+                        return;
+                    }
+
+                    bank.stockList();
+
+
 
                     break;
                 case 2:
@@ -215,7 +235,6 @@ public class App {
                     System.out.println("=== 입출금 ===");
                     System.out.println("1. 입금 2. 출금");
                     int num = sc.nextInt();
-
                     if (num == 1) {
                         // return Bank.입금메서드 호출
                         System.out.println("계좌번호를 입력하세요");

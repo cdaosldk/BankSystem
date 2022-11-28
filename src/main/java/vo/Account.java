@@ -20,10 +20,13 @@ import java.time.LocalDateTime;
     }
     public int getAmount(){return amount;}
 
-    public boolean setDate(LocalDateTime timeHistory) {
+    public void setDate(LocalDateTime timeHistory) {
         this.timeHistory = timeHistory;
-        return false;
     }
+
+    public LocalDateTime getDate() {
+            return timeHistory;
+        }
 
 
 }
