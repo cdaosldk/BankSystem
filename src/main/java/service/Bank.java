@@ -1,7 +1,5 @@
 package service;
 
-
-import org.w3c.dom.ls.LSOutput;
 import vo.Account;
 import vo.User;
 
@@ -43,6 +41,7 @@ public class Bank {
     public boolean checkToUsableBankNum(String bankNum){
 
         if(userList.stream().anyMatch(s->s.getAccountNum().equals(bankNum))){
+            System.out.println("이미 등록된 계좌번호입니다!");
             return false;
         }
         return true;
@@ -128,40 +127,35 @@ public class Bank {
         searchUser.forEach(u -> System.out.println("--------\n"+u.getName()+" "+u.getAccountNum()+ " \n"+u.getStock()+"원 \n"+u.getBankName()+" 은행"));
         return true;
     }
-    //입금
-    public void deposit(String AccountNum,int money){
-        for(int i = 0; i < userList.size(); i++){
-            if (userList.get(i).getAccountNum().equals(AccountNum)){
+
+    public boolean searchNameOnly(String accountName) {
+        Stream<User> searchUser = userList.stream().filter(s -> s.getName().equals(accountName));
+        if (!userList.stream().anyMatch(s -> s.getName().equals(accountName))) {
+            System.out.println(accountName + "님으로 등록된 계좌가 없습니다!");
+            return false;
+        }
+        searchUser.forEach(u -> System.out.println(u.getName() + "님, " + "계좌번호" + u.getAccountNum()));
+        System.out.println("------------");
+        for (int i = 0; i < accountList.size(); i++) {
+            System.out.print("거래일자 및 시간 : " + accountList.get(i).getTimeHistory() + "현재 잔액 : " + userList.get(i).getStock() + "원 ");
+        }
+        return true;
+    }
+// 입출금 메서드
+    public void deposit(String AccountNum, int money) {
+        for (int i = 0; i < userList.size(); i++) {
+            if (userList.get(i).getAccountNum().equals(AccountNum)) {
                 userList.get(i).addStock(money);
                 break;
+                }
             }
-        }
     }
-    //출금
-    public void withdraw(String AccountNum,int money){
-        for(int i = 0; i < userList.size(); i++){
-            if (userList.get(i).getAccountNum().equals(AccountNum)){
+    public void withdraw(String AccountNum, int money) {
+        for (int i = 0; i < userList.size(); i++) {
+            if (userList.get(i).getAccountNum().equals(AccountNum)) {
                 userList.get(i).subtractStock(money);
                 break;
             }
-        }
-    }
-
-    //입금액 목록
-    public void addMoneyMove(Account account){
-        System.out.println("입출금 확인!");
-        LocalDateTime timeHistory = LocalDateTime.now();
-        accountList.add(account);
-    }
-
-    //입출금 메서드
-    public void showAccount(){
-
-        for(int i=0;i<accountList.size();i++){
-            System.out.println("------------");
-            System.out.print(accountList.get(i).getAmount()+"원 ");
-            LocalDateTime timeHistory = LocalDateTime.now();
-            System.out.println(accountList.get(i).setDate(timeHistory)+"시간");
         }
     }
 

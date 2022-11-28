@@ -2,15 +2,11 @@ package vo;
 
 import java.time.LocalDateTime;
 
-public class Account {
-    //필드
-    private LocalDateTime timeHistory; //날짜 시간
-    private String plusCash;  //입금액
-    private String minusCash; //출금액
-    private int amount; //입력금액
-
-    private User user;
-
+    public class Account {
+        private LocalDateTime timeHistory;
+        private int plusCash;
+        private int minusCash;
+        private int amount;
 
     //생성자
     public Account(int amount, LocalDateTime timeHistory){
@@ -22,8 +18,6 @@ public class Account {
     public LocalDateTime getTimeHistory(LocalDateTime timeHistory) {
         return timeHistory;
     }
-    public String getPlusCash(){return plusCash;}
-    public String getMinusCash(){return minusCash;}
     public int getAmount(){return amount;}
 
     public boolean setDate(LocalDateTime timeHistory) {

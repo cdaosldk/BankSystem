@@ -59,10 +59,4 @@ public class User {
         this.stock -= money;
     }
 
-
-//    public void abcd(){
-//        int a = account.getAmount();
-//        int b = getStock();
-//        setStock(a+b);
-//    }
 }
