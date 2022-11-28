@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4e04b665-97b1-4ef1-9963-700cf19928bd" name="변경" comment="다시 올려보는 브런치">
-      <change beforePath="$PROJECT_DIR$/src/main/java/vo/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vo/User.java" afterDir="false" />
-    </list>
+    <list default="true" id="4e04b665-97b1-4ef1-9963-700cf19928bd" name="변경" comment="10:04pm checkout" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -82,5 +80,14 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="vo.Account" memberName="amount" />
+        <PinnedItemInfo parentTag="vo.Account" memberName="timeHistory" />
+        <PinnedItemInfo parentTag="java.time.LocalDateTime" memberName="time" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
 </project>
