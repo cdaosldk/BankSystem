@@ -1,9 +1,7 @@
 package service;
 
-
-import org.w3c.dom.ls.LSOutput;
+import vo.Account;
 import vo.User;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
@@ -11,8 +9,9 @@ import java.util.stream.Stream;
 public class Bank {
 
     private final static Bank bank = new Bank();
+
     private List<User> userList = new ArrayList<>();
-    //private List<Account> account = new ArrayList<>();
+    private List<Account> accountList = new ArrayList<>();
 
     //Bank하나의 객체를 유지하기 위한 메서드
     public static Bank getInstance(){
@@ -47,7 +46,7 @@ public class Bank {
         return true;
     }
 
-    public boolean confrimAccountNum(String inputAccountNum){
+    public boolean confirmAccountNum(String inputAccountNum){
 
         if(userList.stream().anyMatch(s -> s.getAccountNum().equals(inputAccountNum))){
             return true;
@@ -56,7 +55,7 @@ public class Bank {
         return false;
     }
 
-    public boolean confrimAccountPwd(String inputAccountNum, String pwd){
+    public boolean confirmAccountPwd(String inputAccountNum, String pwd){
 
         Stream<User> userInfo = userList.stream().filter(s -> s.getAccountNum().equals(inputAccountNum));
 
@@ -127,16 +126,27 @@ public class Bank {
         searchUser.forEach(u -> System.out.println("--------\n"+u.getName()+" "+u.getAccountNum()+ " \n"+u.getStock()+"원 \n"+u.getBankName()+" 은행"));
         return true;
     }
-    // 입출금 메서드
-    public void showAccount() {
-        System.out.print(userList.get().getName()+"님 ");
-        for(int i=0;i<userList.size();i++){
-            System.out.println("------------");
-            System.out.println(userList.get(i).getStock()+"원 ");
-        }
-    }
 
-    public void deposit(Account account) {
-        accountList.add(account);
+    public boolean searchNameOnly(String accountName) {
+        Stream<User> searchUser = userList.stream().filter(s -> s.getName().equals(accountName));
+        if (!userList.stream().anyMatch(s -> s.getName().equals(accountName))) {
+            System.out.println(accountName + "님으로 등록된 계좌가 없습니다!");
+            return false;
+        }
+        searchUser.forEach(u -> System.out.println(u.getName() + "님, " + "계좌번호" + u.getAccountNum()));
+        System.out.println("------------");
+        for (int i = 0; i < accountList.size(); i++) {
+            System.out.print("거래일자 및 시간 : " + accountList.get(i).getTimeHistory() + userList.get(i).getStock() + "원 ");
+        }
+        return true;
+    }
+// 입출금 메서드
+    public void deposit(String AccountNum, int money) {
+        for (int i = 0; i < userList.size(); i++) {
+            if (userList.get(i).getAccountNum().equals(AccountNum)) {
+                userList.get(i).setStock(money);
+                break;
+                }
+            }
     }
 }
