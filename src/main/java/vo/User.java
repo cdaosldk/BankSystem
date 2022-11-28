@@ -9,13 +9,6 @@ public class User {
 
     private Account account;
 
-    public User() {
-        this.name = name;
-        this.stock = stock;
-        this.accountNum = accountNum;
-        this.bankName = bankName;
-        this.pwd = pwd;
-    }
 
     public User(String name,int stock ,String accountNum, String bankName, String pwd) {
         this.name = name;
@@ -57,9 +50,15 @@ public class User {
         return pwd;
     }
 
+    //입금
     public void addStock(int money){
         this.stock += money;
     }
+    //출금
+    public void subtractStock(int money){
+        this.stock -= money;
+    }
+
 
 //    public void abcd(){
 //        int a = account.getAmount();

@@ -5,6 +5,7 @@ import org.w3c.dom.ls.LSOutput;
 import vo.Account;
 import vo.User;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
@@ -47,7 +48,7 @@ public class Bank {
         return true;
     }
 
-    public boolean confrimAccountNum(String inputAccountNum){
+    public boolean confirmAccountNum(String inputAccountNum){
 
         if(userList.stream().anyMatch(s -> s.getAccountNum().equals(inputAccountNum))){
             return true;
@@ -56,7 +57,7 @@ public class Bank {
         return false;
     }
 
-    public boolean confrimAccountPwd(String inputAccountNum, String pwd){
+    public boolean confirmAccountPwd(String inputAccountNum, String pwd){
 
         Stream<User> userInfo = userList.stream().filter(s -> s.getAccountNum().equals(inputAccountNum));
 
@@ -127,28 +128,40 @@ public class Bank {
         searchUser.forEach(u -> System.out.println("--------\n"+u.getName()+" "+u.getAccountNum()+ " \n"+u.getStock()+"원 \n"+u.getBankName()+" 은행"));
         return true;
     }
-
+    //입금
     public void deposit(String AccountNum,int money){
         for(int i = 0; i < userList.size(); i++){
             if (userList.get(i).getAccountNum().equals(AccountNum)){
-                userList.get(i).setStock(money);
+                userList.get(i).addStock(money);
+                break;
+            }
+        }
+    }
+    //출금
+    public void withdraw(String AccountNum,int money){
+        for(int i = 0; i < userList.size(); i++){
+            if (userList.get(i).getAccountNum().equals(AccountNum)){
+                userList.get(i).subtractStock(money);
                 break;
             }
         }
     }
 
     //입금액 목록
-    public void depositmony(Account account){
-
+    public void addMoneyMove(Account account){
+        System.out.println("입출금 확인!");
+        LocalDateTime timeHistory = LocalDateTime.now();
         accountList.add(account);
     }
 
     //입출금 메서드
     public void showAccount(){
-        for(int i=0;i<userList.size();i++){
+
+        for(int i=0;i<accountList.size();i++){
             System.out.println("------------");
-            System.out.print(userList.get(i).getName()+"님 ");
-            System.out.println(userList.get(i).getStock()+"원 ");
+            System.out.print(accountList.get(i).getAmount()+"원 ");
+            LocalDateTime timeHistory = LocalDateTime.now();
+            System.out.println(accountList.get(i).setDate(timeHistory)+"시간");
         }
     }
 
