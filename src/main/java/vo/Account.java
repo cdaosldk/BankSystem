@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
             this.amount = amount;
         }
 
-        public LocalDateTime getTimeHistory() { return timeHistory;};
+        public LocalDateTime getTimeHistory() { return timeHistory;}
 
         public String getPlusOrMinus() {
             return plusOrMinus;
@@ -36,7 +36,5 @@ import java.time.LocalDateTime;
         public void setTimeHistory(LocalDateTime timeHistory) {
             this.timeHistory = timeHistory;
         }
-        //        public int getPlusCash() { return user};
-//
-//        public int getAmount() { return amount;};
+
 }

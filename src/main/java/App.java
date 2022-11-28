@@ -54,7 +54,7 @@ public class App {
             switch (select) {
                 case 1:
                     System.out.println("=== 계좌 등록 ===");
-                    System.out.print("소유주 : ");
+                    System.out.println("소유주 : ");
                     String name = sc.next();
                     String pattern = "[0-9,\\-]{3,6}\\-[0-9,\\-]{2,6}\\-[0-9,\\-]";
                     System.out.print("계좌번호( ex) xxx-xxxxxx-x ) : ");
@@ -123,7 +123,7 @@ public class App {
                         if (!bank.confirmAccountNum(deleteAccountNum)) {
                             return;
                         }
-                        System.out.print("계좌 비밀번호를 입력하세요 :");
+                        System.out.println("계좌 비밀번호를 입력하세요 :");
                         String deletePwd = sc.next();
                         // 입력한 계좌의 비밀번호가 맞는지 확인
                         if (!bank.confirmAccountPwd(deleteAccountNum, deletePwd)) {
@@ -131,6 +131,8 @@ public class App {
                         }
                         //삭제 메서드 호출
                         bank.deleteAccount(deleteAccountNum);
+                        System.out.println("삭제할 계좌번호를 입력하세요 :");
+                        int deleteAccNum = sc.nextInt();
                     }
                     break;
 
@@ -196,7 +198,28 @@ public class App {
                     // 잔고확인 메서드
                     System.out.println("=== 계좌잔고 조회 ===");
                     System.out.print("이름을 입력하세요 : "); //이름을 입력하세요
-                    String name = sc.nextLine();
+                    String searchNameSt = sc.next();
+                    System.out.println("계좌목록들 입니다");
+                    if(!bank.confirmAccountName(searchNameSt)){
+                        return;
+                    }
+                    bank.searchByUserNameList(searchNameSt);
+                    System.out.print("조회하실 계좌번호를 입력하세요 :");
+                    String searchAccountNum = sc.next();
+                    //search
+                    if (!bank.confirmAccountNum(searchAccountNum)) {
+                        return;
+                    }
+                    System.out.print("계좌 비밀번호를 입력하세요 :");
+                    String searchPwd = sc.next();
+                    // 입력한 계좌의 비밀번호가 맞는지 확인
+                    if (!bank.confirmAccountPwd(searchAccountNum, searchPwd)) {
+                        return;
+                    }
+                    bank.searchAccountStock(searchAccountNum);
+
+
+
                     break;
                 case 2:
                     System.out.println("=== 거래내역 조회 ===");
@@ -279,4 +302,5 @@ public class App {
             }
         }
     }
+
 }
