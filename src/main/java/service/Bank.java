@@ -127,5 +127,16 @@ public class Bank {
         searchUser.forEach(u -> System.out.println("--------\n"+u.getName()+" "+u.getAccountNum()+ " \n"+u.getStock()+"원 \n"+u.getBankName()+" 은행"));
         return true;
     }
+    // 입출금 메서드
+    public void showAccount() {
+        System.out.print(userList.get().getName()+"님 ");
+        for(int i=0;i<userList.size();i++){
+            System.out.println("------------");
+            System.out.println(userList.get(i).getStock()+"원 ");
+        }
+    }
 
+    public void deposit(Account account) {
+        accountList.add(account);
+    }
 }
