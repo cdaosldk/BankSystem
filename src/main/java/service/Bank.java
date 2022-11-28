@@ -136,7 +136,7 @@ public class Bank {
         searchUser.forEach(u -> System.out.println(u.getName() + "님, " + "계좌번호" + u.getAccountNum()));
         System.out.println("------------");
         for (int i = 0; i < accountList.size(); i++) {
-            System.out.print("거래일자 및 시간 : " + accountList.get(i).getTimeHistory() + userList.get(i).getStock() + "원 ");
+            System.out.print("거래일자 및 시간 : " + accountList.get(i).getTimeHistory() + "현재 잔액 : " + userList.get(i).getStock() + "원 ");
         }
         return true;
     }

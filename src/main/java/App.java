@@ -12,7 +12,7 @@ public class App {
             // main 화면, 각 클래스와 관련된 내용으로 연결되고 이후 접속 시 관련 메뉴를 한 번 더 볼 수 있도록 설정
             System.out.println("=== BankSystem에 오신 것을 환영합니다 ===");
             System.out.println("원하시는 메뉴에 해당하는 번호를 입력하세요.");
-            System.out.println("1. 은행 관리 2. 거래내역 관리 3. 종료");
+            System.out.println("1. 은행 관리 2. 거래내역 및 입출금 3. 종료");
             int select = sc.nextInt();
 
             if (select == 3) {
@@ -198,6 +198,7 @@ public class App {
                     System.out.println("이름을 입력하세요"); //이름을 입력하세요
                     String name = sc.nextLine();
 
+
                     break;
                 case 2:
                     System.out.println("=== 거래내역 조회 ===");
@@ -206,7 +207,6 @@ public class App {
                     if (!bank.searchNameOnly(accountName)) {
                         return;
                     }
-
                     break;
                 case 3:
                     System.out.println("=== 입출금 ===");
