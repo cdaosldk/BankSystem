@@ -166,28 +166,6 @@ public class Bank {
         searchUser.forEach(u -> System.out.println("--------\n"+u.getName()+"  "+u.getBankName()+"은행 "+u.getAccountNum()+ " \n"));
     }
 
-    public Boolean confirmNum(int num) {
-
-        if (num > userList.size() - 1) {
-
-            System.out.println("잘못된 번호입니다!");
-            return false;
-        }
-        return true;
-    }
-
-
-
-    public void showStockList(String name){
-
-        for(int i=0;i<userList.size();i++){
-            System.out.println("------------");
-            System.out.print(userList.get(i).getName()+"님 ");
-            System.out.println(userList.get(i).getBankName()+"은행 ");
-            System.out.println("계좌: "+ userList.get(i).getAccountNum()+" ");
-        }
-    }
-
     public void addDepositOrWithdrawList(Account account){
         LocalDateTime localDateTime = LocalDateTime.now();
         account.setTimeHistory(localDateTime);
