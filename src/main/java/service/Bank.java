@@ -144,9 +144,17 @@ public class Bank {
     public void deposit(String AccountNum, int money) {
         for (int i = 0; i < userList.size(); i++) {
             if (userList.get(i).getAccountNum().equals(AccountNum)) {
-                userList.get(i).setStock(money);
+                userList.get(i).addStock(money);
                 break;
                 }
             }
+    }
+    public void withdraw(String AccountNum, int money) {
+        for (int i = 0; i < userList.size(); i++) {
+            if (userList.get(i).getAccountNum().equals(AccountNum)) {
+                userList.get(i).subtractStock(money);
+                break;
+            }
+        }
     }
 }

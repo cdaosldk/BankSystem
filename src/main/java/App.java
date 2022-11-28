@@ -153,12 +153,12 @@ public class App {
                     } else if (num3 == 2) {
                         // 계좌번호 조희 메서드 호출
                         System.out.println("조회하실 계좌번호를 입력하세요 :");
-                        String serchAccountNum = sc.next();
+                        String searchAccountNum = sc.next();
                         //search
-                        if (!bank.confirmAccountNum(serchAccountNum)) {
+                        if (!bank.confirmAccountNum(searchAccountNum)) {
                             return;
                         }
-                        if (!bank.searchByAccountNum(serchAccountNum)) {
+                        if (!bank.searchByAccountNum(searchAccountNum)) {
                             return;
                         }
                     } else {
@@ -182,7 +182,7 @@ public class App {
 //        String accNum = 계좌번호 호출
         while (true) {
             // 입출금내역 관련 화면
-            System.out.println("=== 거래내역 관리 ===");
+            System.out.println("=== 거래 내역 및 입출금 ===");
             System.out.println("원하시는 메뉴에 해당하는 번호를 입력하세요.");
             System.out.println("1. 잔고 확인 2. 거래 내역 조회 3. 입금/출금 4. 이전");
             int accountMenu = sc.nextInt();
@@ -221,6 +221,12 @@ public class App {
                         if (!bank.searchByAccountNum(AccountNum)) {
                             return;
                         }
+                        System.out.print("계좌 비밀번호를 입력하세요 :");
+                        String updatePwd = sc.next();
+                        // 입력한 계좌의 비밀번호가 맞는지 확인
+                        if (!bank.confirmAccountPwd(AccountNum, updatePwd)) {
+                            return;
+                        }
                         System.out.println("입금할 금액을 입력하세요");
                         int money = sc.nextInt();
                         bank.deposit(AccountNum,money);
@@ -228,7 +234,21 @@ public class App {
                     } else {
                         // return Bank.출금메서드 호출
                         System.out.println("계좌번호를 입력하세요");
+                        String AccountNum = sc.next();
+                        //search 계좌번호
+                        if (!bank.searchByAccountNum(AccountNum)) {
+                            return;
+                        }
+                        System.out.print("계좌 비밀번호를 입력하세요 :");
+                        String updatePwd = sc.next();
+                        // 입력한 계좌의 비밀번호가 맞는지 확인
+                        if (!bank.confirmAccountPwd(AccountNum, updatePwd)) {
+                            return;
+                        }
                         System.out.println("출금할 금액을 입력하세요");
+                        int money = sc.nextInt();
+                        bank.withdraw(AccountNum,money);
+                        System.out.println("출금되었습니다.");
                     }
                     break;
                 default:
