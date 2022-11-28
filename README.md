@@ -1,7 +1,7 @@
 # BankSystem
 프로젝트 참여 인원 : 박상훈 손현진 유성재 임동규
 
-사용 기술 : ![img.png](img.png)
+사용 기술 : <img src="https://raw.githubusercontent.com/tandpfun/skill-icons/d1c752b99bb25a0e5aa363bae1db2809173ee966/icons/Github-Dark.svg" width="50" height="50"/>
 
 은행프로그램 진행과정 기록
   
